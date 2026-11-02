@@ -1,5 +1,6 @@
 body {
-    background-color: #eaf2ff;
+    background-color: #0B1F3A;
+    color: white;
 }
 
 main {
@@ -7,6 +8,21 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+h1{
+   color: white;
+   text-align:center;
+   font-size:32px;
+   font-weight:700;
+   letter-spacing:1px;
+   margin-bottom:10px;
+}
+.subtitle{
+color: #B8C7D9;
+text-align: center;
+font-size: 15px;
+letter-spacing: 2px;
+margin-top:0;
 }
 
 .signin-card {
@@ -45,4 +61,10 @@ main {
 
 .signin-card button:hover {
     background-color: #084298;
+}
+.footer {
+text-align:center;
+color:red;
+padding:15px;
+width:100px"
 }
