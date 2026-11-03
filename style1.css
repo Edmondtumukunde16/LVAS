@@ -70,26 +70,7 @@ margin-top:0;
     cursor: pointer;
     font-size: 16px;
 }
-/* Forgot password link */
-.forgot-password {
-    text-align: right;
-    margin-top: 15px;
-    margin-bottom: 0;
-}
 
-.forgot-password a {
-    color: #0d6efd;
-    text-decoration: none;
-    font-size: 14px;
-}
-
-.forgot-password a:hover {
-    color: #084298;
-    text-decoration: underline;
-}
-.signin-card button:hover {
-    background-color: #084298;
-}
 footer {
 text-align:center;
 color:red;
