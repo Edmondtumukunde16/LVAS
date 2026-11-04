@@ -1,0 +1,486 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LVAS Face Verification</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f2f5f9;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            background-color: #10243a;
+        }
+
+        .hero {
+            background: linear-gradient(120deg, #10243a, #1769aa);
+            color: white;
+            padding: 50px 0;
+        }
+
+        .verification-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .camera-frame {
+            background: #111;
+            border-radius: 15px;
+            height: 320px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        video, #photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+
+        .camera-placeholder {
+            color: white;
+            text-align: center;
+        }
+
+        .face-guide {
+            position: absolute;
+            width: 180px;
+            height: 230px;
+            border: 3px solid #00c8ff;
+            border-radius: 50%;
+            display: none;
+            pointer-events: none;
+        }
+
+        .btn-primary {
+            background-color: #1769aa;
+            border: none;
+        }
+
+        footer {
+            background: #10243a;
+            color: white;
+            padding: 20px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVIGATION BAR -->
+<nav class="navbar navbar-dark">
+    <div class="container">
+
+        <a class="navbar-brand fw-bold" href="#">
+            <i class="bi bi-person-bounding-box"></i>
+            LVAS
+        </a>
+
+        <span class="text-white">
+            Identity Verification System
+        </span>
+
+    </div>
+</nav>
+
+
+<!-- HERO SECTION -->
+<section class="hero text-center">
+
+    <div class="container">
+
+        <h1 class="fw-bold">LVAS Face Verification</h1>
+
+        <p class="lead">
+            Secure Face Identification and Verification Portal
+        </p>
+
+        <span class="badge bg-light text-primary">
+            Secure Verification
+        </span>
+
+    </div>
+
+</section>
+
+
+<!-- MAIN CONTENT -->
+<div class="container my-5">
+
+    <div class="row g-4">
+
+        <!-- CAMERA SECTION -->
+        <div class="col-lg-7">
+
+            <div class="card verification-card">
+
+                <div class="card-body p-4">
+
+                    <h3 class="mb-3">
+                        <i class="bi bi-camera-video"></i>
+                        Face Scanner
+                    </h3>
+
+                    <p class="text-muted">
+                        Position your face inside the camera guide.
+                    </p>
+
+                    <!-- CAMERA DISPLAY -->
+                    <div class="camera-frame">
+
+                        <div class="camera-placeholder" id="placeholder">
+
+                            <i class="bi bi-camera display-1"></i>
+
+                            <h5>Camera Preview</h5>
+
+                            <p>Click Start Camera to begin.</p>
+
+                        </div>
+
+                        <video id="video" autoplay playsinline></video>
+
+                        <img id="photo" alt="Captured face">
+
+                        <div class="face-guide" id="faceGuide"></div>
+
+                    </div>
+
+                    <!-- BUTTONS -->
+                    <div class="mt-4 d-flex flex-wrap gap-2">
+
+                        <button class="btn btn-primary"
+                            onclick="startCamera()">
+
+                            <i class="bi bi-camera-video"></i>
+                            Start Camera
+
+                        </button>
+
+
+                        <button class="btn btn-success"
+                            onclick="capturePhoto()"
+                            id="captureBtn"
+                            disabled>
+
+                            <i class="bi bi-camera"></i>
+                            Capture Photo
+
+                        </button>
+
+
+                        <button class="btn btn-warning"
+                            onclick="retakePhoto()"
+                            id="retakeBtn"
+                            disabled>
+
+                            <i class="bi bi-arrow-clockwise"></i>
+                            Retake
+
+                        </button>
+
+                    </div>
+
+                    <div id="message" class="mt-3"></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- INSTRUCTIONS SECTION -->
+        <div class="col-lg-5">
+
+            <div class="card verification-card">
+
+                <div class="card-body p-4">
+
+                    <h4 class="mb-4">
+                        Verification Instructions
+                    </h4>
+
+                    <div class="mb-4">
+
+                        <h6>
+                            <span class="badge bg-primary">1</span>
+                            Allow Camera Access
+                        </h6>
+
+                        <p class="text-muted">
+                            Give the website permission to use your camera.
+                        </p>
+
+                    </div>
+
+
+                    <div class="mb-4">
+
+                        <h6>
+                            <span class="badge bg-primary">2</span>
+                            Position Your Face
+                        </h6>
+
+                        <p class="text-muted">
+                            Make sure your face is clearly visible.
+                        </p>
+
+                    </div>
+
+
+                    <div class="mb-4">
+
+                        <h6>
+                            <span class="badge bg-primary">3</span>
+                            Capture Your Photo
+                        </h6>
+
+                        <p class="text-muted">
+                            Look directly into the camera.
+                        </p>
+
+                    </div>
+
+
+                    <div>
+
+                        <h6>
+                            <span class="badge bg-primary">4</span>
+                            Submit for Verification
+                        </h6>
+
+                        <p class="text-muted">
+                            Submit your captured image to the verification service.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SECURITY CARD -->
+            <div class="card verification-card mt-4">
+
+                <div class="card-body p-4">
+
+                    <h5>
+                        <i class="bi bi-shield-check text-success"></i>
+                        Security Information
+                    </h5>
+
+                    <p class="text-muted">
+                        LVAS uses a face verification interface
+                        to support secure identity checking.
+                    </p>
+
+                    <span class="badge bg-success">
+                        Camera Ready Interface
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- FOOTER -->
+<footer class="text-center">
+
+    <h5>LVAS Face Verification System</h5>
+
+    <p class="mb-0">
+        © 2026 LVAS. All Rights Reserved.
+    </p>
+
+</footer>
+
+
+<!-- BOOTSTRAP JAVASCRIPT -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<!-- FACE VERIFICATION JAVASCRIPT -->
+<script>
+
+    const video = document.getElementById("video");
+
+    const photo = document.getElementById("photo");
+
+    const placeholder = document.getElementById("placeholder");
+
+    const faceGuide = document.getElementById("faceGuide");
+
+    const captureBtn = document.getElementById("captureBtn");
+
+    const retakeBtn = document.getElementById("retakeBtn");
+
+    let cameraStream = null;
+
+
+    // START CAMERA
+    async function startCamera() {
+
+        try {
+
+            if (!navigator.mediaDevices ||
+                !navigator.mediaDevices.getUserMedia) {
+
+                throw new Error("Camera API unavailable");
+
+            }
+
+            if (cameraStream) {
+                cameraStream.getTracks().forEach(track => track.stop());
+            }
+
+            cameraStream = await navigator.mediaDevices.getUserMedia({
+
+                video: {
+                    facingMode: "user"
+                },
+
+                audio: false
+
+            });
+
+            video.srcObject = cameraStream;
+
+            video.style.display = "block";
+
+            photo.style.display = "none";
+
+            placeholder.style.display = "none";
+
+            faceGuide.style.display = "block";
+
+            captureBtn.disabled = false;
+
+            retakeBtn.disabled = true;
+
+            document.getElementById("message").innerHTML =
+
+                '<div class="alert alert-success">Camera started successfully!</div>';
+
+        }
+
+        catch(error) {
+
+            document.getElementById("message").innerHTML =
+
+                '<div class="alert alert-danger">Camera access failed. Allow camera permission and try again.</div>';
+
+        }
+
+    }
+
+
+    // CAPTURE PHOTO
+    function capturePhoto() {
+
+        if (!video.videoWidth) {
+
+            document.getElementById("message").innerHTML =
+
+                '<div class="alert alert-warning">Wait for the camera to load.</div>';
+
+            return;
+
+        }
+
+        const canvas = document.createElement("canvas");
+
+        canvas.width = video.videoWidth;
+
+        canvas.height = video.videoHeight;
+
+        const context = canvas.getContext("2d");
+
+        context.drawImage(video, 0, 0);
+
+        photo.src = canvas.toDataURL("image/png");
+
+        photo.style.display = "block";
+
+        video.style.display = "none";
+
+        faceGuide.style.display = "none";
+
+        // Stop camera after capturing
+        if (cameraStream) {
+
+            cameraStream.getTracks().forEach(track => track.stop());
+
+            cameraStream = null;
+
+        }
+
+        captureBtn.disabled = true;
+
+        retakeBtn.disabled = false;
+
+        document.getElementById("message").innerHTML =
+
+            '<div class="alert alert-info">Photo captured successfully. Actual identity matching is not yet connected.</div>';
+
+    }
+
+
+    // RETAKE PHOTO
+    function retakePhoto() {
+
+        photo.style.display = "none";
+
+        placeholder.style.display = "flex";
+
+        faceGuide.style.display = "none";
+
+        captureBtn.disabled = true;
+
+        retakeBtn.disabled = true;
+
+        startCamera();
+
+    }
+
+
+    // STOP CAMERA WHEN PAGE CLOSES
+    window.addEventListener("beforeunload", function() {
+
+        if (cameraStream) {
+
+            cameraStream.getTracks().forEach(track => track.stop());
+
+        }
+
+    });
+
+</script>
+
+</body>
+</html>
+```
