@@ -31,7 +31,7 @@ margin-top:0;
     background-color: white;
     width: 600px;
     padding: 35px;
-    border: 4px solid #0d6efd;
+    border: 4px solid RED;
     border-radius: 20px;
     border-top: 6px solid var(--teal);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
@@ -70,7 +70,41 @@ margin-top:0;
     cursor: pointer;
     font-size: 16px;
 }
+form{
+ margin: 50px auto;
+    background-color:rgb(26, 8, 189);
+    width: 800px;
+    padding: 35px;
+    border: 4px solid red;
+    border-radius: 20px;
+    border-top: 6px solid var(--teal);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    box-sizing: border-box;
+}
+.form input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+.form input:focus{
+    border: 2px solid #0d6efd;
+    onutline: none;
+}
 
+.form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #0d0435;
+    color: red;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
 footer {
 text-align:center;
 color:red;
