@@ -1,0 +1,75 @@
+body {
+    background-color:#101827;
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+main {
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+h1{
+   color: white;
+   text-align:center;
+   font-size:32px;
+   font-weight:100;
+   letter-spacing:1px;
+   margin-bottom:10px;
+}
+.subtitle{
+color: #B8C7D9;
+text-align: center;
+font-size: 15px;
+letter-spacing: 2px;
+margin-top:0;
+}
+.attendance-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    padding: 40px;
+}
+.attendance-section h2 {
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+}
+.table-container {
+    background-color: rgb(63, 78, 209);
+    padding: 40px;
+    border-radius: 30px;
+    border :700px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    overflow-x: auto;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 550px;
+    color: #333;
+    font-family: Arial, sans-serif;
+}
+th {
+    background-color: #102A43;
+    color: white;
+    padding: 15px;
+    text-align: left;
+}
+td  {
+    background-color: white;
+    color: black;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+footer {
+text-align:center;
+color:red;
+padding:15px;
+width:100px"
+}
