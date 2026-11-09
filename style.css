@@ -62,7 +62,6 @@ margin-top:0;
 .team-heading h1 { margin-top: 15px; font-weight: 700; }
 .team-heading p { color: #666; max-width: 500px; margin: 10px auto; }
 
-/* CARD - organized */
 .member-card {
   background: white;
   border-radius: 16px;
@@ -94,7 +93,6 @@ margin-top:0;
 }
 
  
-/*Styling the member profile image */
 .member-card img {
   width: 160px;
   height: 160px;
