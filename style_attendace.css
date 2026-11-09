@@ -37,10 +37,11 @@ margin-top:0;
     color: white;
     font-size: 32px;
     font-weight: bold;
+    margin: 10px;
 }
 .table-container {
     background-color: rgb(63, 78, 209);
-    padding: 40px;
+    padding: 20px;
     border-radius: 30px;
     border :700px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.3);
