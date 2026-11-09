@@ -1,8 +1,24 @@
  body {
-  background: #f5f7fb;
+  background: #101827;
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
 }
+h1{
+   color: white;
+   text-align:center;
+   font-size:32px;
+   font-weight:700;
+   letter-spacing:1px;
+   margin-bottom:10px;
+}
+.subtitle{
+color: #B8C7D9;
+text-align: center;
+font-size: 15px;
+letter-spacing: 2px;
+margin-top:0;
+}
+
 
 .header {
   background: white;
