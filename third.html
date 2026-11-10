@@ -42,7 +42,49 @@
 font-size:12px;border:solid blue;color:blue;width:fit-content;cursor:pointer;align-self:center;border-radius:30px" onclick="window.location.href='Fourth.html'"><strong>ATTENDANCE HISTORY </strong></a></button><br>
 <button type="button" style="padding:5px 15px;
 font-size:12px;border:solid blue;color:blue;width:fit-content;cursor:pointer;align-self:center;border-radius:30px" onclick="window.location.href='MEMBERS.html'"><strong>THE TEAM BEHIND LVAS</strong></a></button>
+
+<script>
+
+//To show registered students
+const students = JSON.parse(localStorage.getItem('registeredStudents')||'[]');
+const tbody = document.getElementById('attendanceBody');
+
+if(students.length > 0){
+tbody.innerHTML ='';
+students.forEach((s,i) =>{
+
+const row = document.createElement('tr')
+const regNo ='ST' + String(i+1).padStart(3,'0');
+
+row.innerHTML='
+<td>${s.name}</td>
+<td>${s.access}</td>
+<td>${s.date}</td>
+<td>${s.status}</td>
+';
+
+tbody.appendChild(row);
+});
+}
+
+//To show who signed in last and times logged in
+
+const lastSignedIn =localStorage.getItem('lastSignedIn');
+const signInLog = JSON.parse(localStorage.getItem('signInLog')||'[]');
+
+if(lastSignedIn){
+document.getElementById('lastSignIn').textContent = 'Last signed in: '+ LastSignedIn;
+
+}
+
+if(signInLog.length > 0){
+document.getElementById('signInCount').textContent ='Total sign-ins recorded:' + signInLog.length;
+}
+
+</script>
 </main>
+
+
 
 <footer style"text-align:center;color:red;
 padding:15px;width:100px">
