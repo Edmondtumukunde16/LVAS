@@ -43,13 +43,12 @@ p {
   max-width: 900px;
   margin: 20px auto;
   background-color: cyan;
-  box-shadow: 0 2px 8px rgba(29, 78, 216, 0.2);
 }
 
 
   th {
   background-color: #1d4ed8;
-  color: black;
+  color: white;
   padding: 12px;
   text-align: left;
 }

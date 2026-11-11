@@ -1,0 +1,37 @@
+body {
+    background-color:#101827;
+    font-family: Arial, sans-serif;
+    color: white;
+    margin:0;
+    padding: 20px;
+h1{
+   color: white;
+   text-align:center;
+   font-size:32px;
+   font-weight:700;
+   letter-spacing:1px;
+   margin-bottom:10px;
+}
+.subtitle{
+color: #B8C7D9;
+text-align: center;
+font-size: 15px;
+letter-spacing: 2px;
+margin-top:0;
+}
+
+  h2{
+   color: rgb(253, 113, 113);
+   text-align:center;
+   font-size:32px;
+   font-weight:100;
+   letter-spacing:1px;
+   margin-bottom:10px;
+}
+
+  
+p {
+  text-align: center;
+}
+
+
