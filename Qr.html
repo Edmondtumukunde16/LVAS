@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LVAS | Lecturer Portal</title>
+
+    <link rel="stylesheet" href="QR.css">
+</head>
+
+<body>
+
+    <h1 style="text-align:center;font-size:30px;">
+        LECTURE VERIFICATION AND ATTENDANCE SYSTEM
+    </h1>
+
+    <p class="subtitle" style="text-align:center;">
+        Secure. Simple. Reliable.
+    </p>
+
+    <nav style="display:flex;justify-content:center;gap:25px;margin-bottom:35px;">
+        <a href="index.html">Home</a>
+        <a href="third.html">Dashboard</a>
+    </nav>
+
+    <main class="container">
+
+        <div class="qr-section">
+
+            <h2>Generate Lecture QR Code</h2>
+
+            <label for="lecture">Lecture Code</label>
+
+            <input
+                type="text"
+                id="lecture"
+                placeholder="Enter lecture code"
+            >
+
+            <button onclick="generateQR()">
+                Generate QR Code
+            </button>
+
+            <div id="qrcode"></div>
+
+            <button
+                id="downloadBtn"
+                onclick="downloadQR()"
+                style="display:none;"
+            >
+                Download QR Code
+            </button>
+
+            <br><br>
+
+            <!-- Attendance Dashboard Button -->
+
+            <button
+                onclick="window.location.href='third.html'"
+                style="width:auto;padding:9px 20px;font-size:13px;
+                display:block;margin:15px auto;background-color:#0759b5;"
+            >
+                VIEW ATTENDANCE LIST
+            </button>
+
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        <p>Copyright &copy; 2026 LVAS. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <script>
+
+        function generateQR() {
+
+            let lecture = document.getElementById("lecture").value.trim();
+
+            if (lecture === "") {
+                alert("Please enter a lecture code");
+                return;
+            }
+
+            document.getElementById("qrcode").innerHTML = "";
+
+            // Generate a demonstration QR code containing the lecture code
+            new QRCode(document.getElementById("qrcode"), {
+                text: lecture,
+                width: 200,
+                height: 200
+            });
+
+            document.getElementById("downloadBtn").style.display = "block";
+
+        }
+
+
+        function downloadQR() {
+
+            let qr = document.querySelector("#qrcode canvas");
+
+            if (qr) {
+
+                let link = document.createElement("a");
+
+                link.href = qr.toDataURL("image/png");
+
+                link.download = "LVAS-Lecture-QR.png";
+
+                link.click();
+
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>

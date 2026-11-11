@@ -1,84 +1,210 @@
+
 <!DOCTYPE html>
-<html lang = "en">
+<html lang="en">
+
 <head>
-<meta charset ="UTF-8">
-<link rel="stylesheet" href="style5.css">
-<h1 style="text-align:center;font-size:30px;margin-bottom:15px;"><strong>LECTURE VERIFICATION AND ATTENDANCE SYSTEM</strong></h1>
-<p class="subtitle">Secure.Simple.Reliable</p>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Attendance History</title>
+
+    <link rel="stylesheet" href="style5.css">
+</head>
+
+<body>
+
+    <h1 style="text-align:center;font-size:30px;margin-bottom:15px;">
+        <strong>LECTURE VERIFICATION AND ATTENDANCE SYSTEM</strong>
+    </h1>
+
+    <p class="subtitle">Secure.Simple.Reliable</p>
+
+    <h2 style="text-align:center;">ATTENDANCE HISTORY</h2>
+
+    <p>Hello <strong id="studentName">Student</strong>!</p>
+
+    <p>
+        Access Number:
+        <strong id="studentAccess"></strong>
+    </p>
+
+    <!-- SEARCH ATTENDANCE -->
+    <div style="margin:20px 0;">
+
+        <label for="searchDate">Search attendance by date:</label>
+
+        <input type="date" id="searchDate">
+
+        <button type="button" onclick="searchAttendance()">
+            SEARCH
+        </button>
+
+        <button type="button" onclick="showAllAttendance()">
+            SHOW ALL
+        </button>
+
+    </div>
+
+    <!-- ATTENDANCE TABLE -->
+    <table border="1" cellpadding="10" cellspacing="0" width="100%">
+
+        <thead>
+            <tr>
+                <th>NAME</th>
+                <th>ACCESS NUMBER</th>
+                <th>DATE</th>
+                <th>STATUS</th>
+            </tr>
+        </thead>
+
+        <tbody id="attendanceTable">
+
+        </tbody>
+
+    </table>
+
+    <p id="noRecords" style="text-align:center;color:red;"></p>
+
+    <br>
+
+    <button type="button"
+        style="padding:5px 15px;font-size:12px;border:solid blue;
+        color:blue;width:fit-content;cursor:pointer;"
+        onclick="window.location.href='index.html'">
+
+        <strong>BACK</strong>
+
+    </button>
+
+    <footer style="text-align:center;color:red;padding:15px;">
+
+        <p>Copyright &copy; 2026 LVAS, All rights reserved.</p>
+
+    </footer>
 
 
-     <body>
- <h2> ATTENDANCE HISTORY</h2>
-<p> Hello <strong>Student</strong> ! </p>
-   
+    <script>
 
-   <table>
-  <tr>
- <th>Date</th>
-<th>Lecture</th>
-<th>Time</th>
-<th>Hall</th>
-</th>
+        // Get the signed-in student's details
+        const student = JSON.parse(
+            sessionStorage.getItem("verifiedStudent")
+        );
 
- <tr>
-   <td>18.9.2026</td>
-<td> Essential Hardware </td> 
- <td>8:00 - 10:00 </td>
-<td> N11 </td>
-</tr>
+        // Get saved attendance records
+        const attendanceRecords = JSON.parse(
+            localStorage.getItem("lvasAttendance") || "[]"
+        );
 
-   <tr>
-  <td>18.9.2026</td>
-<td>Fundamentals of computing </td>
-<td>10:00 - 12:00 </td>
-<td>K13 </td>
-</tr>
+        const table = document.getElementById("attendanceTable");
+
+        const noRecords = document.getElementById("noRecords");
 
 
-<tr>
-   <td>20.9.2026</td> 
-  <td>Structured programming </td>
-<td>8:00 - 10:00 </td>
-<td> N13 </td>
-</tr> 
-  
+        // Display student information
+        if (student) {
 
-<tr>
-   <td>23.9.2026</td>
-<td> Essential Hardware </td> 
- <td>8:00 - 10:00 </td>
-<td> N11 </td>
-</tr>
+            document.getElementById("studentName").textContent =
+                student.name;
 
- <tr>
-<td>24.9.2026</td>
-<td>Fundamentals of computing </td>
-<td>10:00 - 12:00 </td>
-<td>K13 </td>
-</tr>
+            document.getElementById("studentAccess").textContent =
+                student.accessNumber;
 
- <tr>
-<td>26.9.2026</td> 
-<td>Structured programming </td>
-<td>8:00 - 10:00 </td>
-<td> N13 </td>
-</tr> 
+        } else {
 
-</table>
-<button type="button" style="padding:5px 15px;
-font-size:12px;border:solid blue;color:blue;width:fit-content;cursor:pointer;align-self:center;" onclick="window.location.href='third.html'"><strong>BACK</strong></a></button>
+            document.getElementById("studentName").textContent =
+                "Student not signed in";
+
+        }
+
+
+        // Display attendance records
+        function displayAttendance(records) {
+
+            table.innerHTML = "";
+
+            noRecords.textContent = "";
+
+            if (records.length === 0) {
+
+                noRecords.textContent = "No attendance records found.";
+
+                return;
+
+            }
+
+            records.forEach(function(record) {
+
+                const row = document.createElement("tr");
+
+                row.innerHTML = `
+                    <td>${record.name}</td>
+                    <td>${record.accessNumber}</td>
+                    <td>${record.date}</td>
+                    <td>${record.status}</td>
+                `;
+
+                table.appendChild(row);
+
+            });
+
+        }
+
+
+        // Show only this student's attendance
+        function showAllAttendance() {
+
+            if (!student) return;
+
+            const myRecords = attendanceRecords.filter(function(record) {
+
+                return record.accessNumber === student.accessNumber;
+
+            });
+
+            displayAttendance(myRecords);
+
+            document.getElementById("searchDate").value = "";
+
+        }
+
+
+        // Search attendance by date
+        function searchAttendance() {
+
+            if (!student) return;
+
+            const selectedDate =
+                document.getElementById("searchDate").value;
+
+            if (!selectedDate) {
+
+                alert("Please select a date.");
+
+                return;
+
+            }
+
+            const dateParts = selectedDate.split("-");
+
+            const formattedDate =
+                dateParts[2] + "/" + dateParts[1] + "/" + dateParts[0];
+
+            const results = attendanceRecords.filter(function(record) {
+
+                return record.accessNumber === student.accessNumber &&
+                       record.date === formattedDate;
+
+            });
+
+            displayAttendance(results);
+
+        }
+
+
+        // Load attendance when page opens
+        showAllAttendance();
+
+    </script>
+
 </body>
-
- <footer style"text-align:center;color:red;
-padding:15px;width:100px">
-
-<p>Copyright &copy 2026 LVAS,All rights reserved.</p>
-
-</footer>
- <!-- Group collaboration: QR Code 
- Page development -->
-
 </html>
-
-
-

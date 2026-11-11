@@ -1,0 +1,79 @@
+ <style>
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7fc;
+    font-family: Arial, sans-serif;
+}
+
+.header {
+    background-color: #082b63;
+    color: white;
+    padding: 20px 40px;
+}
+
+.header h2 {
+    margin: 0;
+}
+
+.header p {
+    margin: 5px 0 0;
+    font-size: 13px;
+}
+
+.qr-section {
+    max-width: 550px;
+    margin: 60px auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.qr-section h2 {
+    color: #082b63;
+    margin-bottom: 25px;
+}
+
+.qr-section label {
+    display: block;
+    text-align: left;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.qr-section input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+.qr-section button {
+    width: 100%;
+    padding: 12px;
+    background-color: #082b63;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.qr-section button:hover {
+    background-color: #0759b5;
+}
+
+#qrcode {
+    margin: 25px auto;
+    display: flex;
+    justify-content: center;
+}
+
+.footer {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}
+</style>

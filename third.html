@@ -1,99 +1,259 @@
-<!DOCTYPE html>
-<html lang = "en">
-<head>
-<meta charset ="UTF-8">
-<h1 style="text-align:center;font:white;font-size:30px;margin-bottom:15px;"><strong>LECTURE VERIFICATION AND ATTENDANCE SYSTEM</strong></h1>
-<p class="subtitle">Secure.Simple.Reliable</p>
 
-<nav style="display:flex;justify-content:center;gap:25px;text-color:blue;marginbottom:5px;">
-<a href="index.html">Home</a>
-<a href="registration_form.html">Register</a>
-<a href="third.html">Dashdoard</a>
-</nav>
-<link rel="stylesheet" href="style_attendace.css">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LVAS | Student Attendance</title>
+
+    <link rel="stylesheet" href="style_attendace.css">
 
 </head>
-<main class ="attendance-section">
-<h2 style="text-align:center;">Student Attendance</h2>
-<div> 
-<table>
-<thread>
-<tr>
 
-<th >NAME</th>
-<th >ACCESS NUMBER</th>
-<th >REG NUMBER</th>
-<th >DATE</th>
-<th >STATUS</th>
+<body>
 
-</tr>
+    <h1 style="text-align:center;font-size:30px;margin-bottom:15px;">
+        <strong>LECTURE VERIFICATION AND ATTENDANCE SYSTEM</strong>
+    </h1>
 
-<tr>
-<td>JOSEPH KIYIMBA</td>
-<td>B41478</td>
-<td>ST002</td>
-<td>11/4/2026</td>
-<td><span class="status-present">Present</span></td>
-</tr>
+    <p class="subtitle" style="text-align:center;">
+        Secure.Simple.Reliable
+    </p>
 
-<tr>
-<td>ARIHO ADRIANO</td>
-<td>B40203</td>
-<td>ST004</td>
-<td>11/4/2026</td>
-<td><span class="status-present">Present</span></td>
-</tr>
+    <nav style="display:flex;justify-content:center;gap:25px;margin-bottom:25px;">
 
-<tr>
-<td>LUYOMBYA BORIS</td>
-<td>B61678</td>
-<td>ST008</td>
-<td>11/4/2026</td>
-<td><span class="status-present">Present</span></td>
-</tr>
+        <a href="index.html">Home</a>
 
-<tr>
-<td>ASHABA IAN</td>
-<td>B66678</td>
-<td>ST014</td>
-<td>11/4/2026</td>
-<td><span class="status-present">Present</span></td>
-</tr>
+        <a href="registration_form.html">Register</a>
 
-<tr>
-<td>LEKOBA ETHAN</td>
-<td>B41487</td>
-<td>ST009</td>
-<td>11/4/2026</td>
-<td><span class="status-present">Present</span></td>
-</tr>
-<tr>
-<td>EBWE JOSHUA LASURU</td>
-<td>B42204</td>
-<td>ST011</td>
-<td>11/4/2026</td>
-<td><span class="status-present">Present</span></td>
-</tr>
-<tr>
-<td>GLENN TWESIIME</td>
-<td>B39829</td>
-<td>ST012</td>
-<td>11/4/2026</td>
-<td><span class="status-present">Present</span></td>
-</tr>
-</thread>
-</table>
-</div>
-  <button type="button" style="padding:2px 5px;margin:10PX;
-font-size:12px;border:solid blue;color:blue;width:fit-content;cursor:pointer;align-self:center;border-radius:30px" onclick="window.location.href='Fourth.html'"><strong>ATTENDANCE HISTORY </strong></a></button><br>
-<button type="button" style="padding:5px 15px;
-font-size:12px;border:solid blue;color:blue;width:fit-content;cursor:pointer;align-self:center;border-radius:30px" onclick="window.location.href='MEMBERS.html'"><strong>THE TEAM BEHIND LVAS</strong></a></button>
-</main>
+        <a href="third.html">Dashboard</a>
 
-<footer style"text-align:center;color:red;
-padding:15px;width:100px">
+    </nav>
 
-<p>Copyright &copy 2026 LVAS,All rights reserved.</p>
 
-</footer>
+    <main class="attendance-section">
+
+        <h2 style="text-align:center;">
+            Student Attendance
+        </h2>
+
+        <p style="text-align:center;">
+            Attendance Date: <strong id="todayDate"></strong>
+        </p>
+
+        <div>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>NAME</th>
+
+                        <th>ACCESS NUMBER</th>
+
+                        <th>DATE</th>
+
+                        <th>STATUS</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="attendanceRows">
+
+                    <!-- Student attendance will appear here -->
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <div style="text-align:center;margin-top:20px;">
+
+            <button
+                type="button"
+                style="padding:5px 15px;margin:10px;
+                font-size:12px;border:solid blue;color:blue;
+                cursor:pointer;border-radius:30px;"
+
+                onclick="window.location.href='Fourth.html'">
+
+                <strong>ATTENDANCE HISTORY</strong>
+
+            </button>
+
+            <br>
+
+            <button
+                type="button"
+                style="padding:5px 15px;
+                font-size:12px;border:solid blue;color:blue;
+                cursor:pointer;border-radius:30px;"
+
+                onclick="window.location.href='MEMBERS.html'">
+
+                <strong>THE TEAM BEHIND LVAS</strong>
+
+            </button>
+
+        </div>
+
+    </main>
+
+
+    <footer style="text-align:center;color:red;padding:15px;width:100%;">
+
+        <p>Copyright &copy; 2026 LVAS, All rights reserved.</p>
+
+    </footer>
+
+
+    <script>
+
+        // All registered students in the dummy dataset
+
+        const students = [
+
+            { name: "TUMUKUNDE EDMOND", accessNumber: "B39676" },
+
+            { name: "KIYIMBA JOSEPH", accessNumber: "B41478" },
+
+            { name: "ARIHO ADRIANO", accessNumber: "B40203" },
+
+            { name: "BORIS LUYOMBYA", accessNumber: "B41066" },
+
+            { name: "ASHABA IAN", accessNumber: "B39659" },
+
+            { name: "LEKOBA ETHAN", accessNumber: "B41487" },
+
+            { name: "EBWE JOSHUA LASURU", accessNumber: "B42204" },
+
+            { name: "GLENN TWESIIME", accessNumber: "B39829" }
+
+        ];
+
+
+        // Get attendance records saved during student sign-in
+
+        const attendanceRecords = JSON.parse(
+
+            localStorage.getItem("lvasAttendance") || "[]"
+
+        );
+
+
+        // Get today's date
+
+        const today = new Date().toLocaleDateString("en-GB");
+
+
+        document.getElementById("todayDate").textContent = today;
+
+
+        // Get the attendance table
+
+        const tableBody = document.getElementById("attendanceRows");
+
+
+        // Display all students and their attendance status
+
+        students.forEach(function(student) {
+
+
+            // Check whether the student signed in today
+
+            const record = attendanceRecords.find(function(item) {
+
+                return item.accessNumber === student.accessNumber &&
+                       item.date === today;
+
+            });
+
+
+            // Determine attendance status
+
+            let status = record ? "Present" : "Absent";
+
+
+            // Create a new table row
+
+            const row = document.createElement("tr");
+
+
+            // Create student name cell
+
+            const nameCell = document.createElement("td");
+
+            nameCell.textContent = student.name;
+
+
+            // Create access number cell
+
+            const accessCell = document.createElement("td");
+
+            accessCell.textContent = student.accessNumber;
+
+
+            // Create date cell
+
+            const dateCell = document.createElement("td");
+
+            dateCell.textContent = record ? record.date : "—";
+
+
+            // Create status cell
+
+            const statusCell = document.createElement("td");
+
+            const statusSpan = document.createElement("span");
+
+            statusSpan.textContent = status;
+
+
+            // Apply the appropriate status class
+
+            if (status === "Present") {
+
+                statusSpan.className = "status-present";
+
+            } else {
+
+                statusSpan.className = "status-absent";
+
+            }
+
+
+            statusCell.appendChild(statusSpan);
+
+
+            // Add all cells to the row
+
+            row.appendChild(nameCell);
+
+            row.appendChild(accessCell);
+
+            row.appendChild(dateCell);
+
+            row.appendChild(statusCell);
+
+
+            // Add the row to the attendance table
+
+            tableBody.appendChild(row);
+
+
+        });
+
+    </script>
+
+</body>
+
 </html>

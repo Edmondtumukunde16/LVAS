@@ -1,44 +1,261 @@
-<!DOCTYPE html>
-<html lang = "en">
-<head>
-<meta charset ="UTF-8">
-<h1 style="text-align:center;font-size:30px;margin-bottom:15px;"><strong>LECTURE VERIFICATION AND ATTENDANCE SYSTEM</strong></h1>
-<p class="subtitle">Secure.Simple.Reliable</p>
 
-<nav style="display:flex;justify-content:center;gap:25px;text-color:blue;marginbottom:35px;">
-<a href="index.html">Home</a>
-<a href="registration_form.html">Register</a>
-<a href="third.html">Dashdoard</a>
-</nav>
-<link rel="stylesheet" href="style1.css">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LVAS | Sign In</title>
+
+    <link rel="stylesheet" href="style1.css">
+
 </head>
+
 <body>
 
-<form class="signin-card" action="face.html">
-<h2 style="text-align:center;margin-top:35px;margin-bottom:15px;">SIGN IN</h2>
+    <h1 style="text-align:center;font-size:30px;margin-bottom:15px;">
+        <strong>LECTURE VERIFICATION AND ATTENDANCE SYSTEM</strong>
+    </h1>
 
-<label for="name"><font color="blue">NAME</font></label>
-<input type="text" id="name" name="Name" placeholder="Enter your name" required><br>
-
-<label for="accessNumber"><font color="blue">Access Number</font> </label>
-<input type="text" id="acessNumber" name="Access Number" placeholder=" Enter your accessNumber" required><br>
-
-<button type="submit"  style="padding:5px 15px;
-font-size:12px;border:solid blue;color:blue;width:fit-content;cursor:pointer;align-self:center;"<strong>SCAN FACE</strong>
+    <p class="subtitle" style="text-align:center;">
+        Secure.Simple.Reliable
+    </p>
 
 
-</a></button>
+    <nav style="display:flex;justify-content:center;gap:25px;margin-bottom:35px;">
 
-</form>
+        <a href="index.html">Home</a>
+
+        <a href="registration_form.html">Register</a>
+
+        <a href="third.html">Dashboard</a>
+
+    </nav>
+
+
+    <!-- SIGN-IN CARD -->
+
+    <form class="signin-card" id="signInForm">
+
+        <h2 style="text-align:center;margin-top:35px;margin-bottom:15px;">
+            SIGN IN
+        </h2>
+
+        <label for="name">NAME</label>
+
+        <input
+            type="text"
+            id="name"
+            placeholder="Enter your name"
+            required
+        >
+
+        <br>
+
+        <label for="accessNumber">Access Number</label>
+
+        <input
+            type="text"
+            id="accessNumber"
+            placeholder="Enter your access number"
+            required
+        >
+
+        <br>
+
+        <button type="submit" style="padding:5px 15px;">
+            SCAN FACE
+        </button>
+
+        <p id="loginMessage"></p>
+
+    </form>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        // STUDENT DATASET
+
+        const students = [
+
+            { name: "TUMUKUNDE EDMOND", accessNumber: "B001" },
+            { name: "KIYIMBA JOSEPH", accessNumber: "B002" },
+            { name: "ARIHO ADRIANO", accessNumber: "B003" },
+            { name: "BORIS LUYOMBYA", accessNumber: "B004" },
+            { name: "ASHABA IAN", accessNumber: "B005" },
+            { name: "LEKOBA ETHAN", accessNumber: "B006" },
+            { name: "EBWE JOSHUA LASURU", accessNumber: "B007" },
+            { name: "GLENN TWESIIME", accessNumber: "B008" }
+
+        ];
+
+
+        // LECTURER DATASET
+
+        const lecturers = [
+
+            { name: "MR ROBERT", accessNumber: "L1001" },
+            { name: "MR KENT", accessNumber: "L1002" }
+
+        ];
+
+
+        // SIGN-IN FORM
+
+        document.getElementById("signInForm").addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            const name = document.getElementById("name").value.trim().toUpperCase();
+
+            const accessNumber = document.getElementById("accessNumber").value.trim().toUpperCase();
+
+            const message = document.getElementById("loginMessage");
+
+
+            // CHECK STUDENT DETAILS
+
+            const student = students.find(function(s) {
+
+                return s.name === name &&
+                       s.accessNumber === accessNumber;
+
+            });
+
+
+            // CHECK LECTURER DETAILS
+
+            const lecturer = lecturers.find(function(l) {
+
+                return l.name === name &&
+                       l.accessNumber === accessNumber;
+
+            });
+
+
+            // STUDENT FLOW
+
+            if (student) {
+
+                sessionStorage.setItem(
+                    "verifiedStudent",
+                    JSON.stringify(student)
+                );
+
+
+                // Get existing attendance records
+
+                let attendanceRecords = JSON.parse(
+                    localStorage.getItem("lvasAttendance") || "[]"
+                );
+
+
+                // Get today's date
+
+                const today = new Date().toLocaleDateString("en-GB");
+
+
+                // Check if student has already signed in today
+
+                const alreadyRecorded = attendanceRecords.some(function(record) {
+
+                    return record.accessNumber === student.accessNumber &&
+                           record.date === today;
+
+                });
+
+
+                // Save attendance if not already recorded
+
+                if (!alreadyRecorded) {
+
+                    const newRecord = {
+
+                        name: student.name,
+                        accessNumber: student.accessNumber,
+                        date: today,
+                        status: "Present"
+
+                    };
+
+                    attendanceRecords.push(newRecord);
+
+                    localStorage.setItem(
+                        "lvasAttendance",
+                        JSON.stringify(attendanceRecords)
+                    );
+
+                }
+
+
+                message.style.color = "green";
+
+                message.textContent =
+                    "Student recognized! Proceeding to face verification...";
+
+
+                setTimeout(function() {
+
+                    window.location.href = "face.html";
+
+                }, 1000);
+
+            }
+
+
+            // LECTURER FLOW
+
+            else if (lecturer) {
+
+                sessionStorage.setItem(
+                    "verifiedLecturer",
+                    JSON.stringify(lecturer)
+                );
+
+
+                message.style.color = "green";
+
+                message.textContent =
+                    "Lecturer recognized! Opening lecturer portal...";
+
+
+                setTimeout(function() {
+
+                    window.location.href = "QR.html";
+
+                }, 1000);
+
+            }
+
+
+            // INVALID DETAILS
+
+            else {
+
+                message.style.color = "red";
+
+                message.textContent =
+                    "Access denied! Details not found.";
+
+            }
+
+        });
+
+    </script>
+
+
+    <!-- FOOTER -->
+
+    <footer style="text-align:center;color:red;padding:15px;width:100%;">
+
+        <p>Copyright &copy; 2026 LVAS, All rights reserved.</p>
+
+    </footer>
 
 </body>
 
-<footer style"text-align:center;color:red;
-padding:15px;width:100px">
-
-<p>Copyright &copy 2026 LVAS,All rights reserved.</p>
-
-</footer>
- <!-- Group collaboration: QR Code 
- Page development -->
 </html>
