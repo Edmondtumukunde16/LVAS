@@ -1,5 +1,5 @@
  body {
-  background: #101827;
+  background:#101827;
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
 }
@@ -12,7 +12,7 @@ h1{
    margin-bottom:10px;
 }
 .subtitle{
-color: #B8C7D9;
+color: #101827;
 text-align: center;
 font-size: 15px;
 letter-spacing: 2px;
@@ -48,7 +48,7 @@ margin-top:0;
 .team-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 20px;
 }
 .team-heading { text-align: center; margin-bottom: 40px; }
 .team-heading .tag {

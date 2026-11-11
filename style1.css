@@ -1,6 +1,6 @@
 body {
     background-color:#101827;
-    font-family: Arial, sans-serif;
+    font-family:Times New Roman;
     color: white;
 }
 
@@ -31,8 +31,8 @@ margin-top:0;
     background-color: white;
     width: 600px;
     padding: 35px;
-    border: 4px solid red;
-    border-radius: 20px;
+    border: 6px solid red;
+    border-radius: 40px;
     border-top: 6px solid var(--teal);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
     box-sizing: border-box;
