@@ -1,0 +1,113 @@
+
+   
+
+<!DOCTYPE html>
+<html lang = "en"> 
+<head>
+<meta charset ="UTF-8">
+    <title>Attendance History</title>
+<link rel="stylesheet" href="style.css">
+
+<h1 style="text-align:center;font-size:30px;margin-bottom:15px;"><strong>LECTURE VERIFICATION AND ATTENDANCE SYSTEM</strong></h1>
+<p class="subtitle">Secure.Simple.Reliable</p>
+
+</head>
+
+<body>
+
+  
+    <h2>Student Information</h2>
+
+    <p><b>Name:</b> Lekoba Ethan</p>
+    <p><b>Reg No:</b> S26B23/164</p>
+
+   <Hr>
+
+    <h2>Search Previous Attendance</h2>
+
+    <label>Enter Attendance Date:</label>
+
+    <input type="date" id="attendanceDate">
+
+    <button onclick="searchAttendance()">Search</button>
+
+    <h3>Search Result:</h3>
+
+    <p id="result">Select a date to search.</p>
+
+    <script>
+
+       
+
+        const attendance = [
+               {date: "2026-08-18", lecture: "Essential Hardware", status: "Present"},
+            {date: "2026-08-18", lecture: "Fundamentals of Computing",status: "Late"},
+            {date: "2026-08-19", lecture: "Probability and Statistics",status: "Present"},
+            {date: "2026-08-19", lecture: "Structured Programming",status: "Present"},
+            {date: "2026-08-20", lecture: "Essential Hardware", status: "Present"},
+            {date: "2026-08-22", lecture: "Fundamentals of Computing",status: "Late"},
+            {date: "2026-09-10", lecture: "Probability and Statistics",status: "Present"},
+            {date: "2026-09-12", lecture: "Structured Programming",status: "Present"},
+            {date: "2026-10-05", lecture: "Essential Hardware", status: "Present"},
+            {date: "2026-10-08", lecture: "Fundamentals of Computing",status: "Late"},
+            {date: "2026-10-10", lecture: "Probability and Statistics",status: "Present"},
+            {date: "2026-10-12", lecture: "Structured Programming",status: "Present"},
+            {date: "2026-10-18", lecture: "Essential Hardware", status: "Present"},
+            {date: "2026-10-22", lecture: "Fundamentals of Computing",status: "Late"},
+            {date: "2026-10-31", lecture: "Probability and Statistics",status: "Present"},
+            {date: "2026-11-02", lecture: "Structured Programming",status: "Present"},
+            {date: "2026-11-05", lecture: "Essential Hardware", status: "Present"},
+            {date: "2026-11-08", lecture: "Fundamentals of Computing",status: "Late"},
+            {date: "2026-11-10", lecture: "Probability and Statistics",status: "Present"},
+            {date: "2026-11-12", lecture: "Structured Programming",status: "Present"}
+
+        ];
+
+        
+function searchAttendance() {
+
+    let selectedDate =
+        document.getElementById("attendanceDate").value;
+
+    let records = attendance.filter(
+        item => item.date === selectedDate
+    );
+
+    if (selectedDate === "") {
+
+        document.getElementById("result").innerHTML =
+            "Please select a date.";
+
+    }
+
+    else if (records.length > 0) {
+
+        let output = "";
+
+        records.forEach(function(record) {
+
+            output +=
+                "<b>Lecture:</b> " + record.lecture + "<br>" +
+                "<b>Attendance Status:</b> " + record.status +
+                "<hr>";
+
+        });
+
+        document.getElementById("result").innerHTML = output;
+
+    }
+
+    else {
+
+        document.getElementById("result").innerHTML =
+            "No attendance records found for this date.";
+
+    }
+
+}
+
+    </script>
+
+</body>
+</html>
+
