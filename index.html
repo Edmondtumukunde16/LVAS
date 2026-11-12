@@ -28,8 +28,6 @@
 
         <a href="index.html">Home</a>
 
-       
-
         <a href="Fourth.html">Dashboard</a>
 
     </nav>
@@ -147,21 +145,21 @@
                 );
 
 
-                // Get existing attendance records
+                // GET EXISTING ATTENDANCE RECORDS
 
                 let attendanceRecords = JSON.parse(
                     localStorage.getItem("lvasAttendance") || "[]"
                 );
 
 
-                // Get today's date
+                // GET TODAY'S DATE
 
                 const today = new Date().toLocaleDateString("en-GB");
 
 
-                // Check if student has already signed in today
+                // CHECK IF STUDENT HAS ALREADY SIGNED IN TODAY
 
-                const alreadyRecorded = attendanceRecords.some(function(record) {
+                const existingRecord = attendanceRecords.find(function(record) {
 
                     return record.accessNumber === student.accessNumber &&
                            record.date === today;
@@ -169,27 +167,53 @@
                 });
 
 
-                // Save attendance if not already recorded
+                // GET CURRENT TIME
 
-                if (!alreadyRecorded) {
+                const currentTime = new Date().toLocaleTimeString("en-GB");
+
+
+                // SAVE OR UPDATE ATTENDANCE
+
+                if (!existingRecord) {
 
                     const newRecord = {
 
                         name: student.name,
                         accessNumber: student.accessNumber,
                         date: today,
+                        time: currentTime,
+                        location: "UCU Main Campus",
                         status: "Present"
 
                     };
 
                     attendanceRecords.push(newRecord);
 
-                    localStorage.setItem(
-                        "lvasAttendance",
-                        JSON.stringify(attendanceRecords)
-                    );
+                } else {
+
+                    // UPDATE EXISTING RECORD IF DETAILS ARE MISSING
+
+                    if (!existingRecord.time) {
+
+                        existingRecord.time = currentTime;
+
+                    }
+
+                    if (!existingRecord.location) {
+
+                        existingRecord.location = "UCU Main Campus";
+
+                    }
 
                 }
+
+
+                // SAVE ATTENDANCE RECORDS
+
+                localStorage.setItem(
+                    "lvasAttendance",
+                    JSON.stringify(attendanceRecords)
+                );
 
 
                 message.style.color = "green";

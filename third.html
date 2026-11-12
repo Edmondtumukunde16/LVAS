@@ -3,83 +3,55 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>LVAS | Student Attendance</title>
 
     <link rel="stylesheet" href="style_attendace.css">
-
 </head>
 
 <body>
 
-    <h1 style="text-align:center;font-size:30px;margin-bottom:15px;">
-        <strong>LECTURE VERIFICATION AND ATTENDANCE SYSTEM</strong>
-    </h1>
+    <h1>LECTURE VERIFICATION AND ATTENDANCE SYSTEM</h1>
 
-    <p class="subtitle" style="text-align:center;">
-        Secure.Simple.Reliable
-    </p>
+    <p class="subtitle">Secure. Simple. Reliable</p>
 
-    <nav style="display:flex;justify-content:center;gap:25px;margin-bottom:25px;">
+   <nav style="display:flex;justify-content:center;gap:25px;margin-bottom:35px;">
 
         <a href="index.html">Home</a>
 
 
     </nav>
 
-
     <main class="attendance-section">
 
-        <h2 style="text-align:center;">
-            Student Attendance
-        </h2>
+        <h2>STUDENT ATTENDANCE</h2>
 
-        <p style="text-align:center;">
-            Attendance Date: <strong id="todayDate"></strong>
+        <p>
+            Today's Date:
+            <strong id="todayDate"></strong>
         </p>
 
-        <div>
+        <table>
 
-            <table>
+            <thead>
+                <tr>
+                    <th>NAME</th>
+                    <th>ACCESS NUMBER</th>
+                    <th>DATE</th>
+                    <th>TIME</th>
+                    <th>LOCATION</th>
+                    <th>STATUS</th>
+                </tr>
+            </thead>
 
-                <thead>
+            <tbody id="attendanceRows">
+            </tbody>
 
-                    <tr>
+        </table>
 
-                        <th>NAME</th>
-
-                        <th>ACCESS NUMBER</th>
-
-                        <th>DATE</th>
-
-                        <th>STATUS</th>
-
-                    </tr>
-
-                </thead>
-
-
-                <tbody id="attendanceRows">
-
-                    <!-- Student attendance will appear here -->
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-
-        <div style="text-align:center;margin-top:20px;">
-
-          
-
-            <br>
-
-            <button
+      <button
                 type="button"
                 style="padding:5px 15px;
                 font-size:12px;border:solid blue;color:blue;
@@ -91,72 +63,50 @@
 
             </button>
 
-        </div>
-
     </main>
 
-
-    <footer style="text-align:center;color:red;padding:15px;width:100%;">
-
-        <p>Copyright &copy; 2026 LVAS, All rights reserved.</p>
-
+    <footer>
+        <p>Lecture Verification and Attendance System</p>
     </footer>
 
 
     <script>
 
-        // All registered students in the dummy dataset
-
+        // Registered students
         const students = [
 
             { name: "TUMUKUNDE EDMOND", accessNumber: "B001" },
-
             { name: "KIYIMBA JOSEPH", accessNumber: "B002" },
-
             { name: "ARIHO ADRIANO", accessNumber: "B003" },
-
             { name: "BORIS LUYOMBYA", accessNumber: "B004" },
-
             { name: "ASHABA IAN", accessNumber: "B005" },
-
             { name: "LEKOBA ETHAN", accessNumber: "B006" },
-
             { name: "EBWE JOSHUA LASURU", accessNumber: "B007" },
-
             { name: "GLENN TWESIIME", accessNumber: "B008" }
 
         ];
 
 
-        // Get attendance records saved during student sign-in
-
+        // Retrieve attendance records from local storage
         const attendanceRecords = JSON.parse(
-
             localStorage.getItem("lvasAttendance") || "[]"
-
         );
 
 
         // Get today's date
-
         const today = new Date().toLocaleDateString("en-GB");
-
 
         document.getElementById("todayDate").textContent = today;
 
 
-        // Get the attendance table
-
+        // Get the table body
         const tableBody = document.getElementById("attendanceRows");
 
 
-        // Display all students and their attendance status
-
+        // Display each student
         students.forEach(function(student) {
 
-
-            // Check whether the student signed in today
-
+            // Find the student's attendance record for today
             const record = attendanceRecords.find(function(item) {
 
                 return item.accessNumber === student.accessNumber &&
@@ -166,47 +116,46 @@
 
 
             // Determine attendance status
-
             let status = record ? "Present" : "Absent";
 
 
-            // Create a new table row
-
+            // Create a table row
             const row = document.createElement("tr");
 
 
-            // Create student name cell
-
+            // Create name cell
             const nameCell = document.createElement("td");
-
             nameCell.textContent = student.name;
 
 
             // Create access number cell
-
             const accessCell = document.createElement("td");
-
             accessCell.textContent = student.accessNumber;
 
 
             // Create date cell
-
             const dateCell = document.createElement("td");
-
             dateCell.textContent = record ? record.date : "—";
 
 
-            // Create status cell
+            // Create time cell
+            const timeCell = document.createElement("td");
+            timeCell.textContent = record ? (record.time || "—") : "—";
 
+
+            // Create location cell
+            const locationCell = document.createElement("td");
+            locationCell.textContent = record ? (record.location || "—") : "—";
+
+
+            // Create status cell
             const statusCell = document.createElement("td");
 
             const statusSpan = document.createElement("span");
-
             statusSpan.textContent = status;
 
 
-            // Apply the appropriate status class
-
+            // Apply status styling
             if (status === "Present") {
 
                 statusSpan.className = "status-present";
@@ -218,29 +167,25 @@
             }
 
 
+            // Add status to status cell
             statusCell.appendChild(statusSpan);
 
 
             // Add all cells to the row
-
             row.appendChild(nameCell);
-
             row.appendChild(accessCell);
-
             row.appendChild(dateCell);
-
+            row.appendChild(timeCell);
+            row.appendChild(locationCell);
             row.appendChild(statusCell);
 
 
-            // Add the row to the attendance table
-
+            // Add row to the table
             tableBody.appendChild(row);
-
 
         });
 
     </script>
 
 </body>
-
 </html>
