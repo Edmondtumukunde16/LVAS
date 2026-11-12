@@ -1,11 +1,30 @@
- <style>
 body {
-    margin: 0;
-    padding: 0;
-    background-color: #f4f7fc;
-    font-family: Arial, sans-serif;
+    background-color:#101827;
+    font-family:Times New Roman;
+    color: white;
 }
 
+main {
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+h1{
+   color: white;
+   text-align:center;
+   font-size:32px;
+   font-weight:700;
+   letter-spacing:1px;
+   margin-bottom:10px;
+}
+.subtitle{
+color: #B8C7D9;
+text-align: center;
+font-size: 15px;
+letter-spacing: 2px;
+margin-top:0;
+}
 .header {
     background-color: #082b63;
     color: white;
@@ -22,11 +41,14 @@ body {
 }
 
 .qr-section {
-    max-width: 550px;
+    max-width: 700px;
     margin: 60px auto;
     padding: 30px;
     background-color: white;
-    border-radius: 12px;
+    border: 6px solid red;
+    border-radius: 40px;
+    border-top: 6px solid var(--teal);
+    box-sizing: border-box;
     text-align: center;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
@@ -71,9 +93,11 @@ body {
     justify-content: center;
 }
 
-.footer {
-    text-align: center;
-    padding: 20px;
-    color: #666;
+footer {
+text-align:center;
+color:red;
+padding:15px;
+width:100px"
 }
-</style>
+}
+

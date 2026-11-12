@@ -1,6 +1,6 @@
 body {
     background-color:#101827;
-    font-family: Arial, sans-serif;
+    font-family: Times New Roman;
     color: white;
 }
 
@@ -19,7 +19,7 @@ h1{
    margin-bottom:10px;
 }
 .subtitle{
-color: #B8C7D9;
+color: white;
 text-align: center;
 font-size: 15px;
 letter-spacing: 2px;
@@ -48,7 +48,7 @@ margin-top:0;
     overflow-x: auto;
 }
 table {
-    border-collapse: collapse;
+    
     width: 100%;
     min-width: 550px;
     color: #333;
@@ -64,7 +64,7 @@ td  {
     background-color: white;
     color: black;
     padding: 5px 12px;
-    border-radius: 20px;
+    border-radius: 5px;
     font-size: 13px;
     font-weight: bold;
 }
